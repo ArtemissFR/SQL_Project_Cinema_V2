@@ -151,7 +151,9 @@ CREATE TABLE SCENARIO(
 
 ####################CRÉATION DE VALEURS FACTICES####################
 
+#------------------------------------------------------------
 #--[TABLE-ACTEURS]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table ACTEURS
 INSERT INTO ACTEURS (acteur_id, acteur_nom, acteur_prenom, acteur_date_naissance)
@@ -163,7 +165,9 @@ VALUES
     (5, 'Phoenix', 'Joaquin', '1974-10-28');
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-GENRES]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table GENRES
 INSERT INTO GENRES (genre_id, genre_nom)
@@ -175,7 +179,9 @@ VALUES
     (5, 'Thriller');
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-REALISATEUR]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table REALISATEUR
 INSERT INTO REALISATEUR (realisateur_id, realisateur_nom, realisateur_prenom, realisateur_date_naissance)
@@ -187,7 +193,9 @@ VALUES
     (5, 'Scorsese', 'Martin', '1942-11-17');
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-SALLES]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table SALLES
 INSERT INTO SALLES (salle_id, salle_nom, salle_capacite)
@@ -199,7 +207,9 @@ VALUES
     (5, 'Salle E', 200);
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-THEME]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table THEME
 INSERT INTO THEME (theme_id, theme_nom)
@@ -211,7 +221,9 @@ VALUES
     (5, 'Historique');
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-FILMS]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table FILMS
 INSERT INTO FILMS (film_id, film_titre, film_annee, genre_id, realisateur_id, acteur_id, theme_id)
@@ -223,7 +235,9 @@ VALUES
     (5, 'LÉvasion Inattendue', 2021, 5, 4, 5, 5);
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-PROJECTIONS]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table PROJECTIONS
 INSERT INTO PROJECTIONS (projection_id, film_id, salle_id, projection_date_heure)
@@ -235,7 +249,9 @@ VALUES
     (5, 5, 5, '2024-02-14 17:30:00');
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-PERSONNEL]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table PERSONNEL
 INSERT INTO PERSONNEL (realisateur_id, acteur_id, film_id, effectif)
@@ -247,7 +263,9 @@ VALUES
     (5, 1, 5, 9);
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-SCENARIO]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table SCENARIO
 INSERT INTO SCENARIO (genre_id, theme_id, film_id)
@@ -259,7 +277,9 @@ VALUES
     (5, 5, 5);
 -- Ajoutez autant d'enregistrements que nécessaire
 
+#------------------------------------------------------------
 #--[TABLE-SEANCE]--
+#------------------------------------------------------------
 
 -- Générer des données factices pour la table SEANCE
 INSERT INTO SEANCE (salle_id, projection_id, film_id, reservation)
