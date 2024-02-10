@@ -1,5 +1,6 @@
 --Version 0.1 
 --DB-Cinéma
+#-- By Louis PROVOST
 
 ####################CRÉATION DE LA BASE DE DONNÉES####################
 
