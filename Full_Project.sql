@@ -1,7 +1,7 @@
 --Version 0.1 
 --DB-Cinéma
 
-##########CRÉATION DE LA BASE DE DONNÉES##########
+####################CRÉATION DE LA BASE DE DONNÉES####################
 
 #------------------------------------------------------------
 #        Script MySQL.
@@ -145,3 +145,7 @@ CREATE TABLE SCENARIO(
 	,CONSTRAINT SCENARIO_THEME0_FK FOREIGN KEY (theme_id) REFERENCES THEME(theme_id)
 	,CONSTRAINT SCENARIO_FILMS1_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
 )ENGINE=InnoDB;
+
+####################CRÉATION DE LA BASE DE DONNÉES####################
+
+####################CRÉATION DE VALEURS FACTICES####################
