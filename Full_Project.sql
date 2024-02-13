@@ -316,3 +316,14 @@ JOIN Films ON Projections.film_id = Films.film_id
 JOIN Salles ON Projections.salle_id = Salles.salle_id;
 
 ####################CRÉATION DE VUES####################
+
+####################CRÉATION DE TRIGGERS####################
+	
+CREATE TRIGGER UpdateTotalProjections
+AFTER INSERT ON Projections
+FOR EACH ROW
+UPDATE Films
+SET total_projections = total_projections + 1
+WHERE film_id = NEW.film_id;
+
+####################CRÉATION DE TRIGGERS####################
