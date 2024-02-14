@@ -8,6 +8,8 @@
 #        Script MySQL.
 #------------------------------------------------------------
 
+CREATE DATABASE IF NOT EXISTS db_cinema;
+USE db_cinema;
 
 #------------------------------------------------------------
 # Table: FILMS
