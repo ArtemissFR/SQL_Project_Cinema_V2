@@ -4,7 +4,7 @@ VALUES
   (1, 'Le Voyageur', 2022, 'Drame', 1, 1),
   (2, 'Les Étoiles Brillantes', 2020, 'Science-Fiction', 2, 3),
   (3, 'Secrets Obscurs', 2019, 'Thriller', 1, 2),
-  (4, 'L'Éclat du Soleil', 2021, 'Romance', 3, 4);
+  (4, 'LÉclat du Soleil', 2021, 'Romance', 3, 4);
 
 -- Données factices pour la table ACTEURS
 INSERT INTO ACTEURS (acteur_id, acteur_nom, acteur_prenom, acteur_date_naissance)
