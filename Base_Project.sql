@@ -11,10 +11,9 @@ CREATE TABLE FILMS(
         film_id        Int NOT NULL ,
         film_titre     Varchar (255) NOT NULL ,
         film_annee     Year NOT NULL ,
-        genre_id       Int NOT NULL ,
+        film_genre     Varchar (50) NOT NULL ,
         realisateur_id Int NOT NULL ,
-        acteur_id      Int NOT NULL ,
-        theme_id       Int NOT NULL
+        acteur_id      Int NOT NULL
 	,CONSTRAINT FILMS_PK PRIMARY KEY (film_id)
 )ENGINE=InnoDB;
 
@@ -46,17 +45,6 @@ CREATE TABLE REALISATEUR(
 
 
 #------------------------------------------------------------
-# Table: GENRES
-#------------------------------------------------------------
-
-CREATE TABLE GENRES(
-        genre_id  Int NOT NULL ,
-        genre_nom Varchar (30) NOT NULL
-	,CONSTRAINT GENRES_PK PRIMARY KEY (genre_id)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
 # Table: SALLES
 #------------------------------------------------------------
 
@@ -82,30 +70,48 @@ CREATE TABLE PROJECTIONS(
 
 
 #------------------------------------------------------------
-# Table: THEME
+# Table: CRITIQUES
 #------------------------------------------------------------
 
-CREATE TABLE THEME(
-        theme_id  Int NOT NULL ,
-        theme_nom Varchar (50) NOT NULL
-	,CONSTRAINT THEME_PK PRIMARY KEY (theme_id)
+CREATE TABLE CRITIQUES(
+        critique_id    Int NOT NULL ,
+        film_id        Int NOT NULL ,
+        utilisateur_id Int NOT NULL ,
+        note           Decimal (3,1) NOT NULL ,
+        commentaire    Text NOT NULL ,
+        date_critique  Date NOT NULL
+	,CONSTRAINT CRITIQUES_PK PRIMARY KEY (critique_id)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: PERSONNEL
+# Table: UTILISATEURS
 #------------------------------------------------------------
 
-CREATE TABLE PERSONNEL(
+CREATE TABLE UTILISATEURS(
+        utilisateur_id           Int NOT NULL ,
+        nom_utilisateur          Varchar (50) NOT NULL ,
+        email_utilisateur        Varchar (255) NOT NULL ,
+        mot_de_passe_utilisateur Varchar (255) NOT NULL ,
+        date_inscription         Date NOT NULL
+	,CONSTRAINT UTILISATEURS_PK PRIMARY KEY (utilisateur_id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: CASTING
+#------------------------------------------------------------
+
+CREATE TABLE CASTING(
+        film_id        Int NOT NULL ,
         realisateur_id Int NOT NULL ,
         acteur_id      Int NOT NULL ,
-        film_id        Int NOT NULL ,
         effectif       Int NOT NULL
-	,CONSTRAINT PERSONNEL_PK PRIMARY KEY (realisateur_id,acteur_id,film_id)
+	,CONSTRAINT CASTING_PK PRIMARY KEY (film_id,realisateur_id,acteur_id)
 
-	,CONSTRAINT PERSONNEL_REALISATEUR_FK FOREIGN KEY (realisateur_id) REFERENCES REALISATEUR(realisateur_id)
-	,CONSTRAINT PERSONNEL_ACTEURS0_FK FOREIGN KEY (acteur_id) REFERENCES ACTEURS(acteur_id)
-	,CONSTRAINT PERSONNEL_FILMS1_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
+	,CONSTRAINT CASTING_FILMS_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
+	,CONSTRAINT CASTING_REALISATEUR0_FK FOREIGN KEY (realisateur_id) REFERENCES REALISATEUR(realisateur_id)
+	,CONSTRAINT CASTING_ACTEURS1_FK FOREIGN KEY (acteur_id) REFERENCES ACTEURS(acteur_id)
 )ENGINE=InnoDB;
 
 
@@ -114,30 +120,30 @@ CREATE TABLE PERSONNEL(
 #------------------------------------------------------------
 
 CREATE TABLE SEANCE(
-        salle_id      Int NOT NULL ,
-        projection_id Int NOT NULL ,
-        film_id       Int NOT NULL ,
-        reservation   Int NOT NULL
-	,CONSTRAINT SEANCE_PK PRIMARY KEY (salle_id,projection_id,film_id)
+        salle_id       Int NOT NULL ,
+        projection_id  Int NOT NULL ,
+        utilisateur_id Int NOT NULL ,
+        reservation_id Int NOT NULL
+	,CONSTRAINT SEANCE_PK PRIMARY KEY (salle_id,projection_id,utilisateur_id)
 
 	,CONSTRAINT SEANCE_SALLES_FK FOREIGN KEY (salle_id) REFERENCES SALLES(salle_id)
 	,CONSTRAINT SEANCE_PROJECTIONS0_FK FOREIGN KEY (projection_id) REFERENCES PROJECTIONS(projection_id)
-	,CONSTRAINT SEANCE_FILMS1_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
+	,CONSTRAINT SEANCE_UTILISATEURS1_FK FOREIGN KEY (utilisateur_id) REFERENCES UTILISATEURS(utilisateur_id)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: SCENARIO
+# Table: SITE-INTERNET
 #------------------------------------------------------------
 
-CREATE TABLE SCENARIO(
-        genre_id Int NOT NULL ,
-        theme_id Int NOT NULL ,
-        film_id  Int NOT NULL
-	,CONSTRAINT SCENARIO_PK PRIMARY KEY (genre_id,theme_id,film_id)
+CREATE TABLE SITE_INTERNET(
+        critique_id    Int NOT NULL ,
+        utilisateur_id Int NOT NULL ,
+        film_id        Int NOT NULL
+	,CONSTRAINT SITE_INTERNET_PK PRIMARY KEY (critique_id,utilisateur_id,film_id)
 
-	,CONSTRAINT SCENARIO_GENRES_FK FOREIGN KEY (genre_id) REFERENCES GENRES(genre_id)
-	,CONSTRAINT SCENARIO_THEME0_FK FOREIGN KEY (theme_id) REFERENCES THEME(theme_id)
-	,CONSTRAINT SCENARIO_FILMS1_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
+	,CONSTRAINT SITE_INTERNET_CRITIQUES_FK FOREIGN KEY (critique_id) REFERENCES CRITIQUES(critique_id)
+	,CONSTRAINT SITE_INTERNET_UTILISATEURS0_FK FOREIGN KEY (utilisateur_id) REFERENCES UTILISATEURS(utilisateur_id)
+	,CONSTRAINT SITE_INTERNET_FILMS1_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
 )ENGINE=InnoDB;
 
