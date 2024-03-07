@@ -1,5 +1,14 @@
-CREATE VIEW FullProjectionDetails AS
-SELECT Projections.projection_id, Films.film_titre, Salles.salle_nom AS salle, Projections.projection_date_heure
-FROM Projections
-JOIN Films ON Projections.film_id = Films.film_id
-JOIN Salles ON Projections.salle_id = Salles.salle_id;
+CREATE VIEW VueCritiques AS
+SELECT
+    C.critique_id,
+    C.film_id,
+    F.film_titre,
+    U.utilisateur_id,
+    U.nom_utilisateur,
+    C.note,
+    C.commentaire,
+    C.date_critique
+FROM
+    CRITIQUES C
+    JOIN FILMS F ON C.film_id = F.film_id
+    JOIN UTILISATEURS U ON C.utilisateur_id = U.utilisateur_id;
