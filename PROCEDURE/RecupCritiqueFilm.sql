@@ -11,3 +11,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- Cette procédure prend en paramètre l'ID d'un film et renvoie les critiques associées à ce film avec le nom de l'utilisateur qui a posté chaque critique.
