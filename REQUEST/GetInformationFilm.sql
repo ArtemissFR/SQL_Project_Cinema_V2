@@ -1,24 +1,15 @@
 SELECT
-    FILMS.film_id,
-    FILMS.film_titre,
-    FILMS.film_annee,
-    REALISATEUR.realisateur_nom,
-    REALISATEUR.realisateur_prenom,
-    GROUP_CONCAT(DISTINCT ACTEURS.acteur_nom ORDER BY ACTEURS.acteur_nom ASC SEPARATOR ', ') AS acteurs,
-    PROJECTIONS.salle_id,
-    SALLES.salle_nom,
-    PROJECTIONS.projection_date_heure
-FROM
-    FILMS
-JOIN REALISATEUR ON FILMS.realisateur_id = REALISATEUR.realisateur_id
-JOIN PERSONNEL ON FILMS.film_id = PERSONNEL.film_id
-JOIN ACTEURS ON PERSONNEL.acteur_id = ACTEURS.acteur_id
-JOIN SCENARIO ON FILMS.film_id = SCENARIO.film_id
-JOIN PROJECTIONS ON FILMS.film_id = PROJECTIONS.film_id
-JOIN SALLES ON PROJECTIONS.salle_id = SALLES.salle_id
-WHERE
-    FILMS.film_id = 1
-GROUP BY
-    FILMS.film_id, FILMS.film_titre, FILMS.film_annee,
-    REALISATEUR.realisateur_nom, REALISATEUR.realisateur_prenom,
-    PROJECTIONS.salle_id, SALLES.salle_nom, PROJECTIONS.projection_date_heure;
+    F.film_id,
+    F.film_titre,
+    F.film_annee,
+    F.film_genre,
+    R.realisateur_nom AS realisateur_nom,
+    R.realisateur_prenom AS realisateur_prenom,
+    A.acteur_nom AS acteur_nom,
+    A.acteur_prenom AS acteur_prenom,
+    P.projection_date_heure
+FROM FILMS F
+JOIN REALISATEUR R ON F.realisateur_id = R.realisateur_id
+JOIN ACTEURS A ON F.acteur_id = A.acteur_id
+JOIN PROJECTIONS P ON F.film_id = P.film_id
+WHERE F.film_id = VOTRE_ID_DE_FILM;
