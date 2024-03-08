@@ -35,6 +35,13 @@ VALUES
   (2, 2, 2, '2022-03-16 20:00:00'),
   (3, 3, 3, '2022-03-17 15:45:00');
 
+-- Données factices pour la table UTILISATEURS
+INSERT INTO UTILISATEURS (utilisateur_id, nom_utilisateur, email_utilisateur, mot_de_passe_utilisateur, date_inscription)
+VALUES
+  (1, 'user1', 'user1@example.com', 'mdp123', '2022-03-01'),
+  (2, 'user2', 'user2@example.com', 'pass456', '2022-03-02'),
+  (3, 'user3', 'user3@example.com', 'secret789', '2022-03-03');
+
 -- Données factices pour la table CRITIQUES
 INSERT INTO CRITIQUES (critique_id, film_id, utilisateur_id, note, commentaire, date_critique)
 VALUES
@@ -42,12 +49,6 @@ VALUES
   (2, 2, 2, 3.8, 'Effets spéciaux incroyables.', '2022-03-17'),
   (3, 3, 3, 4.2, 'Suspens du début à la fin.', '2022-03-18');
 
--- Données factices pour la table UTILISATEURS
-INSERT INTO UTILISATEURS (utilisateur_id, nom_utilisateur, email_utilisateur, mot_de_passe_utilisateur, date_inscription)
-VALUES
-  (1, 'user1', 'user1@example.com', 'mdp123', '2022-03-01'),
-  (2, 'user2', 'user2@example.com', 'pass456', '2022-03-02'),
-  (3, 'user3', 'user3@example.com', 'secret789', '2022-03-03');
 
 -- Données factices pour la table CASTING
 INSERT INTO CASTING (film_id, realisateur_id, acteur_id, effectif)
