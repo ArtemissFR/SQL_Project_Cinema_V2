@@ -11,9 +11,10 @@ CREATE TABLE FILMS(
         film_id        Int NOT NULL ,
         film_titre     Varchar (255) NOT NULL ,
         film_annee     Year NOT NULL ,
+        genre_id       Int NOT NULL ,
         realisateur_id Int NOT NULL ,
         acteur_id      Int NOT NULL ,
-        film_genre     Varchar (50) NOT NULL
+        theme_id       Int NOT NULL
 	,CONSTRAINT FILMS_PK PRIMARY KEY (film_id)
 )ENGINE=InnoDB;
 
@@ -122,17 +123,15 @@ CREATE TABLE SEANCE(
 #------------------------------------------------------------
 
 CREATE TABLE CRITIQUES(
-        film_id_FILMS               Int NOT NULL ,
-        utilisateur_id_UTILISATEURS Int NOT NULL ,
-        critique_id                 Int NOT NULL ,
-        film_id                     Int NOT NULL ,
-        utilisateur_id              Int NOT NULL ,
-        note                        Decimal (3,1) NOT NULL ,
-        commentaire                 Text NOT NULL ,
-        date_critique               Date NOT NULL
-	,CONSTRAINT CRITIQUES_PK PRIMARY KEY (film_id_FILMS,utilisateur_id_UTILISATEURS)
+        film_id        Int NOT NULL ,
+        utilisateur_id Int NOT NULL ,
+        critique_id    Int NOT NULL ,
+        note           Decimal (3,1) NOT NULL ,
+        commentaire    Text NOT NULL ,
+        date_critique  Date NOT NULL
+	,CONSTRAINT CRITIQUES_PK PRIMARY KEY (film_id,utilisateur_id)
 
-	,CONSTRAINT CRITIQUES_FILMS_FK FOREIGN KEY (film_id_FILMS) REFERENCES FILMS(film_id)
-	,CONSTRAINT CRITIQUES_UTILISATEURS0_FK FOREIGN KEY (utilisateur_id_UTILISATEURS) REFERENCES UTILISATEURS(utilisateur_id)
+	,CONSTRAINT CRITIQUES_FILMS_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
+	,CONSTRAINT CRITIQUES_UTILISATEURS0_FK FOREIGN KEY (utilisateur_id) REFERENCES UTILISATEURS(utilisateur_id)
 )ENGINE=InnoDB;
 
