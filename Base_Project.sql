@@ -11,10 +11,9 @@ CREATE TABLE FILMS(
         film_id        Int NOT NULL ,
         film_titre     Varchar (255) NOT NULL ,
         film_annee     Year NOT NULL ,
-        genre_id       Int NOT NULL ,
         realisateur_id Int NOT NULL ,
         acteur_id      Int NOT NULL ,
-        theme_id       Int NOT NULL
+        film_genre     Varchar (50) NOT NULL
 	,CONSTRAINT FILMS_PK PRIMARY KEY (film_id)
 )ENGINE=InnoDB;
 
