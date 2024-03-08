@@ -64,9 +64,3 @@ VALUES
   (2, 2, 2, 102),
   (3, 3, 3, 103);
 
--- Données factices pour la table SITE_INTERNET
-INSERT INTO SITE_INTERNET (critique_id, utilisateur_id, film_id)
-VALUES
-  (1, 1, 1),
-  (2, 2, 2),
-  (3, 3, 3);
