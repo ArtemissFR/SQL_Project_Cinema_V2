@@ -11,9 +11,10 @@ CREATE TABLE FILMS(
         film_id        Int NOT NULL ,
         film_titre     Varchar (255) NOT NULL ,
         film_annee     Year NOT NULL ,
-        film_genre     Varchar (50) NOT NULL ,
+        genre_id       Int NOT NULL ,
         realisateur_id Int NOT NULL ,
-        acteur_id      Int NOT NULL
+        acteur_id      Int NOT NULL ,
+        theme_id       Int NOT NULL
 	,CONSTRAINT FILMS_PK PRIMARY KEY (film_id)
 )ENGINE=InnoDB;
 
@@ -70,21 +71,6 @@ CREATE TABLE PROJECTIONS(
 
 
 #------------------------------------------------------------
-# Table: CRITIQUES
-#------------------------------------------------------------
-
-CREATE TABLE CRITIQUES(
-        critique_id    Int NOT NULL ,
-        film_id        Int NOT NULL ,
-        utilisateur_id Int NOT NULL ,
-        note           Decimal (3,1) NOT NULL ,
-        commentaire    Text NOT NULL ,
-        date_critique  Date NOT NULL
-	,CONSTRAINT CRITIQUES_PK PRIMARY KEY (critique_id)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
 # Table: UTILISATEURS
 #------------------------------------------------------------
 
@@ -92,7 +78,7 @@ CREATE TABLE UTILISATEURS(
         utilisateur_id           Int NOT NULL ,
         nom_utilisateur          Varchar (50) NOT NULL ,
         email_utilisateur        Varchar (255) NOT NULL ,
-        mot_de_passe_utilisateur Varchar (255) NOT NULL ,
+        mot_de_passe_utilisateur Varchar (50) NOT NULL ,
         date_inscription         Date NOT NULL
 	,CONSTRAINT UTILISATEURS_PK PRIMARY KEY (utilisateur_id)
 )ENGINE=InnoDB;
@@ -103,15 +89,15 @@ CREATE TABLE UTILISATEURS(
 #------------------------------------------------------------
 
 CREATE TABLE CASTING(
-        film_id        Int NOT NULL ,
         realisateur_id Int NOT NULL ,
         acteur_id      Int NOT NULL ,
+        film_id        Int NOT NULL ,
         effectif       Int NOT NULL
-	,CONSTRAINT CASTING_PK PRIMARY KEY (film_id,realisateur_id,acteur_id)
+	,CONSTRAINT CASTING_PK PRIMARY KEY (realisateur_id,acteur_id,film_id)
 
-	,CONSTRAINT CASTING_FILMS_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
-	,CONSTRAINT CASTING_REALISATEUR0_FK FOREIGN KEY (realisateur_id) REFERENCES REALISATEUR(realisateur_id)
-	,CONSTRAINT CASTING_ACTEURS1_FK FOREIGN KEY (acteur_id) REFERENCES ACTEURS(acteur_id)
+	,CONSTRAINT CASTING_REALISATEUR_FK FOREIGN KEY (realisateur_id) REFERENCES REALISATEUR(realisateur_id)
+	,CONSTRAINT CASTING_ACTEURS0_FK FOREIGN KEY (acteur_id) REFERENCES ACTEURS(acteur_id)
+	,CONSTRAINT CASTING_FILMS1_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
 )ENGINE=InnoDB;
 
 
@@ -123,7 +109,7 @@ CREATE TABLE SEANCE(
         salle_id       Int NOT NULL ,
         projection_id  Int NOT NULL ,
         utilisateur_id Int NOT NULL ,
-        reservation_id Int NOT NULL
+        reservation    Int NOT NULL
 	,CONSTRAINT SEANCE_PK PRIMARY KEY (salle_id,projection_id,utilisateur_id)
 
 	,CONSTRAINT SEANCE_SALLES_FK FOREIGN KEY (salle_id) REFERENCES SALLES(salle_id)
@@ -133,17 +119,21 @@ CREATE TABLE SEANCE(
 
 
 #------------------------------------------------------------
-# Table: SITE-INTERNET
+# Table: CRITIQUES
 #------------------------------------------------------------
 
-CREATE TABLE SITE_INTERNET(
-        critique_id    Int NOT NULL ,
-        utilisateur_id Int NOT NULL ,
-        film_id        Int NOT NULL
-	,CONSTRAINT SITE_INTERNET_PK PRIMARY KEY (critique_id,utilisateur_id,film_id)
+CREATE TABLE CRITIQUES(
+        film_id_FILMS               Int NOT NULL ,
+        utilisateur_id_UTILISATEURS Int NOT NULL ,
+        critique_id                 Int NOT NULL ,
+        film_id                     Int NOT NULL ,
+        utilisateur_id              Int NOT NULL ,
+        note                        Decimal (3,1) NOT NULL ,
+        commentaire                 Text NOT NULL ,
+        date_critique               Date NOT NULL
+	,CONSTRAINT CRITIQUES_PK PRIMARY KEY (film_id_FILMS,utilisateur_id_UTILISATEURS)
 
-	,CONSTRAINT SITE_INTERNET_CRITIQUES_FK FOREIGN KEY (critique_id) REFERENCES CRITIQUES(critique_id)
-	,CONSTRAINT SITE_INTERNET_UTILISATEURS0_FK FOREIGN KEY (utilisateur_id) REFERENCES UTILISATEURS(utilisateur_id)
-	,CONSTRAINT SITE_INTERNET_FILMS1_FK FOREIGN KEY (film_id) REFERENCES FILMS(film_id)
+	,CONSTRAINT CRITIQUES_FILMS_FK FOREIGN KEY (film_id_FILMS) REFERENCES FILMS(film_id)
+	,CONSTRAINT CRITIQUES_UTILISATEURS0_FK FOREIGN KEY (utilisateur_id_UTILISATEURS) REFERENCES UTILISATEURS(utilisateur_id)
 )ENGINE=InnoDB;
 
